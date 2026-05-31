@@ -38,53 +38,91 @@ where:
 > Sd = dead shoots / total shoots
 > Bdor = reactivated dormant buds / total green shoots
 > Gons = galls on sprouts / total green shoots
+
 Leaf measurements
-Leaf measurements
-Variable	            Description
-CCI	                  Chlorophyll Content Index (field measurement)
-A_sat	                Saturated photosynthesis rate (μmol m⁻² s⁻¹)
-Fv/Fm	                Maximum quantum yield of PSII (chlorophyll fluorescence)
-PI	                  Performance Index
-Gs	                  Stomatal conductance
-F_W / T_W / D_W	      Fresh, saturated, and dry leaf weight (g)
-L_Area	              Leaf area (mm²) — scanned and digitised
-LMA	                  Leaf Mass per Area = D_W / L_Area (g mm⁻²)
-LDMC	                Leaf Dry Matter Content = D_W / T_W
+
+CCI	     -->             Chlorophyll Content Index (field measurement)
+
+A_sat	      -->          Saturated photosynthesis rate (μmol m⁻² s⁻¹)
+
+Fv/Fm	      -->          Maximum quantum yield of PSII (chlorophyll fluorescence)
+
+PI	       -->           Performance Index
+
+Gs	       -->           Stomatal conductance
+
+F_W / T_W / D_W	  -->    Fresh, saturated, and dry leaf weight (g)
+
+L_Area	   -->           Leaf area (mm²) — scanned and digitised
+
+LMA	       -->           Leaf Mass per Area = D_W / L_Area (g mm⁻²)
+
+LDMC	     -->           Leaf Dry Matter Content = D_W / T_W
 
 ---
 Statistical Methods
+
 Infestation indices (DCI, RDB, Galls, Dead Shoots)
-One-way ANOVA to test for differences between provenances and countries
-Levene's test for homogeneity of variances (assumption check)
-Shapiro-Wilk test on ANOVA residuals (normality check)
-Kruskal-Wallis test as non-parametric backup when residuals are non-normal
+
+> One-way ANOVA to test for differences between provenances and countries
+> 
+> Levene's test for homogeneity of variances (assumption check)
+> 
+> Shapiro-Wilk test on ANOVA residuals (normality check)
+> 
+> Kruskal-Wallis test as non-parametric backup when residuals are non-normal
+> 
 Leaf physiological traits (CCI, A_sat, Fv/Fm, etc.)
-Same ANOVA + Levene + Shapiro-Wilk + Kruskal-Wallis pipeline
-Welch's ANOVA (`oneway.test`) when Levene's test indicates unequal variances
-Tukey HSD post-hoc for significant ANOVAs
+
+> Same ANOVA + Levene + Shapiro-Wilk + Kruskal-Wallis pipeline
+> 
+> Welch's ANOVA (`oneway.test`) when Levene's test indicates unequal variances
+> 
+> Tukey HSD post-hoc for significant ANOVAs
+> 
 Correlations
-Shapiro-Wilk to select correlation method
-Spearman's rho (primary): non-parametric, robust to non-normality and outliers
-Kendall's tau: reported alongside Spearman for key pairs with small n
+
+> Shapiro-Wilk to select correlation method
+> 
+> Spearman's rho (primary): non-parametric, robust to non-normality and outliers
+> 
+> Kendall's tau: reported alongside Spearman for key pairs with small n
+> 
 Multivariate analysis
-Principal Component Analysis (PCA) via `FactoMineR::PCA()` on tree-level averages
-Two PCAs: (1) full trait set including gas exchange; (2) reduced set (PI, CCI, A_sat, LMA, LDMC, DCI)
-Biplots produced with `factoextra::fviz\\\_pca\\\_biplot()`, coloured by provenance
+
+> Principal Component Analysis (PCA) via `FactoMineR::PCA()` on tree-level averages
+> 
+> Two PCAs: (1) full trait set including gas exchange; (2) reduced set (PI, CCI, A_sat, LMA, LDMC, DCI)
+> 
+> Biplots produced with `factoextra::fviz\\\_pca\\\_biplot()`, coloured by provenance
+> 
 Mixed-effects models
-`lmer(trait \\\~ Variety + DCI + LMA + (1|ID))` — tree ID as random intercept to account for the two-leaves-per-tree structure (pseudoreplication)
-Fit via `lme4`; p-values from `lmerTest` (Satterthwaite approximation)
+
+> `lmer(trait \\\~ Variety + DCI + LMA + (1|ID))` — tree ID as random intercept to account for the two-leaves-per-tree structure (pseudoreplication)
+> 
+> Fit via `lme4`; p-values from `lmerTest` (Satterthwaite approximation)
+> 
 ---
 Key Findings (from the original study)
-Finding	Result
-DCI by provenance	No significant differences (ANOVA p = 0.6; KW p > 0.05)
-CCI by provenance	Significant (ANOVA p = 0.014); Hortiatis < Coruna (Tukey HSD)
-CCI by country	Significant (ANOVA p = 0.01); Spain > Greece
-A_sat by provenance	Significant (KW p = 0.008); Coruna > Hortiatis & Malaga
-LDMC by provenance	Marginal (KW p = 0.03); Coruna < Hortiatis
-DCI ~ F_W	Significant positive correlation (Spearman rho = 0.23, p = 0.04)
-DCI ~ D_W	Significant positive correlation (rho = 0.23, p = 0.03)
-DCI ~ LMA	Significant positive correlation (rho = 0.30, p = 0.005)
-RDB ~ DCI	Strong positive correlation (rho = 0.75, p < 0.001)
+
+> DCI by provenance -->	No significant differences (ANOVA p = 0.6; KW p > 0.05)
+> 
+> CCI by provenance -->	Significant (ANOVA p = 0.014); Hortiatis < Coruna (Tukey HSD)
+> 
+> CCI by country -->	Significant (ANOVA p = 0.01); Spain > Greece
+> 
+> A_sat by provenance -->	Significant (KW p = 0.008); Coruna > Hortiatis & Malaga
+> 
+> LDMC by provenance -->	Marginal (KW p = 0.03); Coruna < Hortiatis
+> 
+> DCI ~ F_W -->	Significant positive correlation (Spearman rho = 0.23, p = 0.04)
+> 
+> DCI ~ D_W -->	Significant positive correlation (rho = 0.23, p = 0.03)
+> 
+> DCI ~ LMA -->	Significant positive correlation (rho = 0.30, p = 0.005)
+> 
+> RDB ~ DCI -->	Strong positive correlation (rho = 0.75, p < 0.001)
+> 
 ---
 Repository Structure
 ```
