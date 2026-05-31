@@ -18,26 +18,26 @@ The Asian Chestnut Gall Wasp (Dryocosmus kuriphilus Yasumatsu, 1951; Hymenoptera
 This study quantifies the impact of D. kuriphilus on the physiology and morphology of C. sativa leaves across five provenances from three countries (Greece, Italy, Spain) grown together in a common-garden plantation, eliminating confounding environmental variation.
 ---
 Research Questions
-Does infestation severity (DCI index) differ significantly between provenances or countries of origin?
-Do reactivated dormant buds (RDB), gall counts, and dead shoots differ between provenances?
-Are physiological leaf traits (CCI, A_sat, Fv/Fm, PI) affected by provenance or infestation level?
-Which morphological traits (LMA, LDMC, leaf area, weight) are associated with infestation severity?
-What is the multivariate structure of relationships between leaf traits and DCI?
+1. Does infestation severity (DCI index) differ significantly between provenances or countries of origin?
+2. Do reactivated dormant buds (RDB), gall counts, and dead shoots differ between provenances?
+3. Are physiological leaf traits (CCI, A_sat, Fv/Fm, PI) affected by provenance or infestation level?
+4. Which morphological traits (LMA, LDMC, leaf area, weight) are associated with infestation severity?
+5. What is the multivariate structure of relationships between leaf traits and DCI?
 ---
 Study Design
 Sampling
-44 trees randomly selected from a common-garden plantation of 143 individuals
-Provenances: Coruna (Spain, n=12), Hortiatis (Greece, n=9), Malaga (Spain, n=6), Pellice (Italy, n=6), Sicily (Italy, n=11)
-For each tree: one branch (≥50 cm) + two leaves collected (July–August)
+> 44 trees randomly selected from a common-garden plantation of 143 individuals
+> Provenances: Coruna (Spain, n=12), Hortiatis (Greece, n=9), Malaga (Spain, n=6), Pellice (Italy, n=6), Sicily (Italy, n=11)
+> For each tree: one branch (≥50 cm) + two leaves collected (July–August)
 Infestation index
 The DCI (Damage by Cynipid Infestation) index was computed following Gehring et al. (2018):
 ```
 DCI = (Sd × 0.479 + Bdor × 0.525 + Gons × 0.120) × 100
 ```
 where:
-Sd = dead shoots / total shoots
-Bdor = reactivated dormant buds / total green shoots
-Gons = galls on sprouts / total green shoots
+> Sd = dead shoots / total shoots
+> Bdor = reactivated dormant buds / total green shoots
+> Gons = galls on sprouts / total green shoots
 Leaf measurements
 Variable	Description
 CCI	Chlorophyll Content Index (field measurement)
