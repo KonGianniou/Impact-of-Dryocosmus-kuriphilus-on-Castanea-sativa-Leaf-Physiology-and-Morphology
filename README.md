@@ -39,16 +39,18 @@ where:
 > Bdor = reactivated dormant buds / total green shoots
 > Gons = galls on sprouts / total green shoots
 Leaf measurements
-Variable	Description
-CCI	Chlorophyll Content Index (field measurement)
-A_sat	Saturated photosynthesis rate (μmol m⁻² s⁻¹)
-Fv/Fm	Maximum quantum yield of PSII (chlorophyll fluorescence)
-PI	Performance Index
-Gs	Stomatal conductance
-F_W / T_W / D_W	Fresh, saturated, and dry leaf weight (g)
-L_Area	Leaf area (mm²) — scanned and digitised
-LMA	Leaf Mass per Area = D_W / L_Area (g mm⁻²)
-LDMC	Leaf Dry Matter Content = D_W / T_W
+Leaf measurements
+Variable	            Description
+CCI	                  Chlorophyll Content Index (field measurement)
+A_sat	                Saturated photosynthesis rate (μmol m⁻² s⁻¹)
+Fv/Fm	                Maximum quantum yield of PSII (chlorophyll fluorescence)
+PI	                  Performance Index
+Gs	                  Stomatal conductance
+F_W / T_W / D_W	      Fresh, saturated, and dry leaf weight (g)
+L_Area	              Leaf area (mm²) — scanned and digitised
+LMA	                  Leaf Mass per Area = D_W / L_Area (g mm⁻²)
+LDMC	                Leaf Dry Matter Content = D_W / T_W
+
 ---
 Statistical Methods
 Infestation indices (DCI, RDB, Galls, Dead Shoots)
