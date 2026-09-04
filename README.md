@@ -1,157 +1,180 @@
-# Impact of Dryocosmus kuriphilus on Castanea sativa Leaf Physiology and Morphology
-Author: Konstantina Gianniou  
-Institution: Department of Environment, University of the Aegean  
-Study site: University Forest of Taxiarchis, Halkidiki, Greece (40°44'35"N, 23°18'12"E, 760 m a.s.l.)  
-Year: 2021
+# Plant Physiology and Leaf Damage Analysis in R
+
+## About the project
+
+This project was completed during my internship at **ELGO Demeter**, in cooperation with **Aristotle University of Thessaloniki**, while I was a student at the **University of the Aegean**.
+
+The project focused on analysing the effects of infestation by the **Asian Chestnut Gall Wasp (*Dryocosmus kuriphilus*)** on the physiology and morphology of *Castanea sativa* leaves, as well as differences between chestnut provenances and countries of origin.
+
+The analysis was performed in **R**, using statistical tests, visualisation, regression models, mixed-effects models, correlation analysis and Principal Component Analysis (PCA).
+
 ---
-⚠️ Data & Code Disclaimer
-> \\\*\\\*The data in this repository are entirely synthetic.\\\*\\\*
->
-> The original field measurements were collected as part of an internship within the University of the Aegean and remain the intellectual property of the University of the Aegean, ELGO Demeter (Forest Research Institute) and Aristotle University of Thessaloniki. They are not included here.
->
-> The synthetic dataset (`Analisi\\\_Sfika\\\_synthetic.csv`, `Analisi\\\_Physiologia\\\_synthetic.csv`) was generated using `generate\\\_synthetic\\\_data.R`, which reproduces the \\\*\\\*statistical structure\\\*\\\* of the original data — including group sample sizes, provenance-level means and standard deviations, NA patterns, and inter-variable correlation structure — without exposing any real measurements.
->
-> \\\*\\\*The analysis code has also been rewritten from scratch\\\*\\\* to avoid reproducing the original internship report verbatim. The statistical methods, test choices, and interpretation are faithful to the original study; the implementation is new.
+
+## Data and reproducibility
+
+The synthetic datasets (`Analisi_Sfika_synthetic.csv` and `Analisi_Physiologia_synthetic.csv`) were generated using `generate_synthetic_data.R`.
+
+The synthetic data reproduce the **statistical structure** of the original data.
+
+The analysis code has also been **rewritten from scratch** rather than reproducing the original internship report verbatim. The statistical methods, test choices and overall interpretation follow the original study, while the implementation is new.
+
+> **Important:** The original field measurements are not included in this repository. They remain the intellectual property of the University of the Aegean, ELGO Demeter and Aristotle University of Thessaloniki. The results shown here are therefore intended to demonstrate the analysis workflow using synthetic data and should not be interpreted as results from the original field dataset.
+
 ---
-Overview
-The Asian Chestnut Gall Wasp (Dryocosmus kuriphilus Yasumatsu, 1951; Hymenoptera: Cynipidae) is an invasive species endemic to China that reached Europe via Italy in 2002, and was first recorded in Greece in 2014. It induces characteristic galls on chestnut (Castanea sativa Mill.) buds and shoots, causing leaf deformation, reduced photosynthetic capacity, and declines in flowering and fruiting.
-This study quantifies the impact of D. kuriphilus on the physiology and morphology of C. sativa leaves across five provenances from three countries (Greece, Italy, Spain) grown together in a common-garden plantation, eliminating confounding environmental variation.
+
+## Overview
+
+The Asian Chestnut Gall Wasp (*Dryocosmus kuriphilus* Yasumatsu, 1951; Hymenoptera: Cynipidae) is an invasive species that originated in China and reached Europe through Italy in 2002. It was first recorded in Greece in 2014.
+
+The insect induces characteristic galls on chestnut (*Castanea sativa* Mill.) buds and shoots, which can affect leaf development and plant physiology.
+
+This study examines the relationship between infestation, leaf damage, and physiological and morphological traits across **five provenances from three countries: Greece, Italy and Spain**. The plants were grown together in a **common-garden plantation**, reducing the influence of differences in environmental conditions between locations.
+
 ---
-Research Questions
-1. Does infestation severity (DCI index) differ significantly between provenances or countries of origin?
-2. Do reactivated dormant buds (RDB), gall counts, and dead shoots differ between provenances?
-3. Are physiological leaf traits (CCI, A_sat, Fv/Fm, PI) affected by provenance or infestation level?
-4. Which morphological traits (LMA, LDMC, leaf area, weight) are associated with infestation severity?
-5. What is the multivariate structure of relationships between leaf traits and DCI?
+
+## Research Questions
+
+1. Does infestation severity, measured using the **Damage Composite Index (DCI)**, differ significantly between provenances or countries of origin?
+2. Do **reactivated dormant buds (RDB), gall counts and dead shoots** differ between provenances?
+3. Are physiological leaf traits such as **CCI, A_sat, Fv/Fm and PI** affected by provenance or infestation level?
+4. Which morphological traits, including **LMA, LDMC, leaf area and leaf weight**, are associated with infestation severity?
+5. What is the multivariate structure of the relationships between leaf traits and DCI?
+
 ---
-Study Design
-Sampling
-> 44 trees randomly selected from a common-garden plantation of 143 individuals
-> Provenances: Coruna (Spain, n=12), Hortiatis (Greece, n=9), Malaga (Spain, n=6), Pellice (Italy, n=6), Sicily (Italy, n=11)
-> For each tree: one branch (≥50 cm) + two leaves collected (July–August)
-Infestation index
-The DCI (Damage by Cynipid Infestation) index was computed following Gehring et al. (2018):
+
+## Main Results
+
+### Damage and infestation
+
+The **Damage Composite Index (DCI)** showed some variation between varieties, but no statistically significant differences were found between varieties or countries.
+
+Overall, the results suggest that **infestation and leaf damage levels were relatively similar across the groups**, despite some individual variation in damage.
+
+The individual damage-related variables, including RDB, dead shoots, galls and other infestation indicators, also did not show significant overall differences between the groups.
+
+<div align="center">
+<img src="figures/dci_by_variety.png" width="700">
+</div>
+
+---
+
+### Physiological differences
+
+In contrast to the overall damage measures, some physiological traits showed clearer differences between varieties and countries.
+
+**A_sat (photosynthetic assimilation)** showed statistically significant differences between both varieties and countries.
+
+<div align="center">
+<img src="figures/asat_by_variety.png" width="700">
+</div>
+
+**LDMC (Leaf Dry Matter Content)** also showed significant differences between varieties and countries. In the variety comparison, a significant difference was observed between **Hortiatis and Coruna**, while the country comparison showed a significant difference between **Spain and Greece**.
+
+<div align="center">
+<img src="figures/ldmc_by_variety.png" width="700">
+</div>
+
+Other traits, including **CCI** and **leaf area**, did not show statistically significant differences between the groups.
+
+---
+
+### Principal Component Analysis
+
+Principal Component Analysis (PCA) was used to look at the data as a whole and identify the main patterns among the physiological, morphological and damage-related measurements.
+
+The first three components of the reduced PCA explained approximately **73% of the total variation**.
+
+The main patterns were associated with variables such as **A_sat, LMA, CCI, LDMC and DCI**, showing how different plant traits contributed to the overall variation between plants.
+
+<div align="center">
+<img src="figures/pca_biplot.png" width="700">
+</div>
+
+The PCA provides a broader view of the relationships between the measurements rather than testing whether one specific group is statistically different from another.
+
+---
+
+### Correlations
+
+Correlation analysis was used to examine relationships between physiological traits and damage-related variables.
+
+Most direct relationships between **DCI and physiological traits were relatively weak**. A clearer negative relationship was observed between **DCI and sprouts**, meaning that plants with higher damage tended to have fewer sprouts in the synthetic dataset.
+
+<div align="center">
+<img src="figures/correlation_matrix.png" width="700">
+</div>
+
+---
+
+## Overall Conclusion
+
+Overall, the analysis showed that **physiological traits varied more clearly between varieties and countries than the overall infestation level**.
+
+The **Damage Composite Index did not show a significant difference between groups**, suggesting that the overall level of infestation was relatively similar across the provenances and countries represented in the analysis.
+
+In contrast, traits such as **photosynthetic assimilation (A_sat)** and **LDMC** showed significant differences between groups.
+
+The PCA and correlation analyses provided an additional overview of how physiological, morphological and damage-related measurements were related.
+
+Because the repository uses synthetic data, these findings demonstrate the **statistical workflow and structure of the original analysis**, rather than providing biological conclusions about the original field populations.
+
+---
+
+## Methods and Tools
+
+The analysis was performed in **R**, using packages including:
+
+* `tidyverse`
+* `ggplot2`
+* `car`
+* `FactoMineR`
+* `factoextra`
+* `lme4`
+* `lmerTest`
+* `sjPlot`
+* `GGally`
+* `gplots`
+* `wordcloud2`
+
+The workflow included:
+
+* Descriptive statistics and visualisation
+* ANOVA and Welch's ANOVA
+* Kruskal–Wallis tests
+* Levene's and Shapiro–Wilk tests
+* Tukey post-hoc comparisons
+* Principal Component Analysis (PCA)
+* Correlation analysis
+* Linear regression
+* Linear mixed-effects models
+* Damage Composite Index analysis
+
+---
+
+## Repository Structure
+
+```text
+Plant-Physiology-R/
+│
+├── README.md
+├── generate_synthetic_data.R
+├── analysis.R
+│
+├── Analisi_Physiologia_synthetic.csv
+├── Analisi_Sfika_synthetic.csv
+│
+└── figures/
+    ├── asat_by_variety.png
+    ├── ldmc_by_variety.png
+    ├── dci_by_variety.png
+    ├── pca_biplot.png
+    └── correlation_matrix.png
 ```
-DCI = (Sd × 0.479 + Bdor × 0.525 + Gons × 0.120) × 100
-```
-where:
-> Sd = dead shoots / total shoots
-> Bdor = reactivated dormant buds / total green shoots
-> Gons = galls on sprouts / total green shoots
 
-Leaf measurements
+## Reproducibility
 
-CCI	     -->             Chlorophyll Content Index (field measurement)
+The repository contains the synthetic datasets and R scripts required to reproduce the analysis workflow.
 
-A_sat	      -->          Saturated photosynthesis rate (μmol m⁻² s⁻¹)
+The synthetic data allow the statistical structure of the analysis to be demonstrated without exposing the original field measurements.
 
-Fv/Fm	      -->          Maximum quantum yield of PSII (chlorophyll fluorescence)
-
-PI	       -->           Performance Index
-
-Gs	       -->           Stomatal conductance
-
-F_W / T_W / D_W	  -->    Fresh, saturated, and dry leaf weight (g)
-
-L_Area	   -->           Leaf area (mm²) — scanned and digitised
-
-LMA	       -->           Leaf Mass per Area = D_W / L_Area (g mm⁻²)
-
-LDMC	     -->           Leaf Dry Matter Content = D_W / T_W
-
----
-Statistical Methods
-
-Infestation indices (DCI, RDB, Galls, Dead Shoots)
-
-> One-way ANOVA to test for differences between provenances and countries
-> 
-> Levene's test for homogeneity of variances (assumption check)
-> 
-> Shapiro-Wilk test on ANOVA residuals (normality check)
-> 
-> Kruskal-Wallis test as non-parametric backup when residuals are non-normal
-> 
-Leaf physiological traits (CCI, A_sat, Fv/Fm, etc.)
-
-> Same ANOVA + Levene + Shapiro-Wilk + Kruskal-Wallis pipeline
-> 
-> Welch's ANOVA (`oneway.test`) when Levene's test indicates unequal variances
-> 
-> Tukey HSD post-hoc for significant ANOVAs
-> 
-Correlations
-
-> Shapiro-Wilk to select correlation method
-> 
-> Spearman's rho (primary): non-parametric, robust to non-normality and outliers
-> 
-> Kendall's tau: reported alongside Spearman for key pairs with small n
-> 
-Multivariate analysis
-
-> Principal Component Analysis (PCA) via `FactoMineR::PCA()` on tree-level averages
-> 
-> Two PCAs: (1) full trait set including gas exchange; (2) reduced set (PI, CCI, A_sat, LMA, LDMC, DCI)
-> 
-> Biplots produced with `factoextra::fviz\\\_pca\\\_biplot()`, coloured by provenance
-> 
-Mixed-effects models
-
-> `lmer(trait \\\~ Variety + DCI + LMA + (1|ID))` — tree ID as random intercept to account for the two-leaves-per-tree structure (pseudoreplication)
-> 
-> Fit via `lme4`; p-values from `lmerTest` (Satterthwaite approximation)
-> 
----
-Key Findings (from the original study)
-
-> DCI by provenance -->	No significant differences (ANOVA p = 0.6; KW p > 0.05)
-> 
-> CCI by provenance -->	Significant (ANOVA p = 0.014); Hortiatis < Coruna (Tukey HSD)
-> 
-> CCI by country -->	Significant (ANOVA p = 0.01); Spain > Greece
-> 
-> A_sat by provenance -->	Significant (KW p = 0.008); Coruna > Hortiatis & Malaga
-> 
-> LDMC by provenance -->	Marginal (KW p = 0.03); Coruna < Hortiatis
-> 
-> DCI ~ F_W -->	Significant positive correlation (Spearman rho = 0.23, p = 0.04)
-> 
-> DCI ~ D_W -->	Significant positive correlation (rho = 0.23, p = 0.03)
-> 
-> DCI ~ LMA -->	Significant positive correlation (rho = 0.30, p = 0.005)
-> 
-> RDB ~ DCI -->	Strong positive correlation (rho = 0.75, p < 0.001)
-> 
----
-Repository Structure
-```
-dryocosmus-castanea/
-├── generate\\\_synthetic\\\_data.R     ← Run this first to create the datasets
-├── analysis.R                    ← Full statistical pipeline
-├── fig1\\\_DCI\\\_provenance.png       ← DCI violin-boxplot by provenance
-├── fig2\\\_RDB\\\_provenance.png       ← RDB boxplot by provenance
-├── fig3\\\_CCI.png                  ← CCI by provenance and country
-├── fig4\\\_PCA\\\_full.png             ← PCA biplot (all traits)
-├── fig5\\\_PCA\\\_reduced.png          ← PCA biplot (reduced trait set)
-├── fig6\\\_correlation\\\_matrix.png   ← Spearman correlation matrix
-└── README.md
-```
----
-How to Run
-```r
-# Step 1: generate the synthetic datasets
-source("generate\\\_synthetic\\\_data.R")
-
-# Step 2: run the full analysis (installs missing packages automatically)
-source("analysis.R")
-```
-Requires R ≥ 4.1. All packages install automatically on first run.
----
-References
-Gehring E., Bellosi B., Quacchia A. & Conedera M. (2018). Evaluating Dryocosmus kuriphilus-induced damage on Castanea sativa. Journal of Pest Science, Springer.
-R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
----
-Contact
-Konstantina Gianniou  
-g.tem2106@gmail.com | LinkedIn |
+The original measurements and R script are not included in this repository.
